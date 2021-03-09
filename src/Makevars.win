@@ -5,7 +5,7 @@
 # CXXFLAGS += "-fpermissive -std=c++98"
 
 ifeq "$(MECAB_LIBS)" ""
-    MECAB_LIBS =  $(shell "mecab-config" --libs-only-L)"
+    MECAB_LIBS =  $(shell "mecab-config.bat" --libs-only-L)"
 endif
 
 PKG_LIBS = -L$(MECAB_LIBS) -lmecab
