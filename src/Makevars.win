@@ -1,23 +1,14 @@
-
 ###################################################
 # PKG_CXXFLAGS = -O3  
 # CXX_STD = c++03
 # CXX98STD = -std=c++98
 # CXXFLAGS += "-fpermissive -std=c++98"
 
-MECAB = -lmecab
-MECAB64 = -lmecab64
+ifeq "$(MECAB_LIBS)" ""
+    MECAB_LIBS =  $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript.exe" -e "cat(Sys.which('libmecab.dll'))"
+endif
 
-
-
-ifeq "$(WIN)" "64"
-     PKG_LIBS = -L../src-x64 $(MECAB64)# value for 64-bit Windows
-else
-     PKG_LIBS = -L../src-i386 $(MECAB)# value for 32-bit Windows
-     endif
+PKG_LIBS = -L$(MECAB_LIBS) -lmecab
 
 PKG_CPPFLAGS = -I.
-
-
-
 
