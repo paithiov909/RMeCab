@@ -5,7 +5,7 @@
 # CXXFLAGS += "-fpermissive -std=c++98"
 
 ifeq "$(MECAB_LIBS)" ""
-    MECAB_LIBS =  $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript.exe" -e "cat(Sys.which('libmecab.dll'))"
+    MECAB_LIBS =  $(shell "mecab-config" --libs-only-L)"
 endif
 
 PKG_LIBS = -L$(MECAB_LIBS) -lmecab
