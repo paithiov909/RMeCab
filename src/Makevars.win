@@ -2,6 +2,6 @@ ifeq "$(MECAB_LIBS)" ""
     MECAB_LIBS = C:/MeCab/bin
 endif
 
-PKG_LIBS = -L$(MECAB_LIBS) -lmecab
+PKG_LIBS = -L$(MECAB_LIBS) -llibmecab
 PKG_CPPFLAGS = -I'../inst/include/'
 
