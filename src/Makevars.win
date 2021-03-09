@@ -5,7 +5,7 @@
 # CXXFLAGS += "-fpermissive -std=c++98"
 
 ifeq "$(MECAB_LIBS)" ""
-    MECAB_LIBS = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript.exe" -e "libs <- stringr::str_replace_all(system('mecab-config.bat --libs-only-L', intern = T), stringr::fixed('\\'), '/')); cat(stringr::str_sub(libs, 1, nchar(libs)-1))")
+    MECAB_LIBS = $(shell "$(R_HOME)/bin$(R_ARCH_BIN)/Rscript.exe" -e cat(stringr::str_sub(stringr::str_replace_all(system('mecab-config.bat --libs-only-L', intern = T), stringr::fixed('\\'), '/'), 1, nchar(libs)-1))")
 endif
 
 PKG_LIBS = -L$(MECAB_LIBS) -lmecab
