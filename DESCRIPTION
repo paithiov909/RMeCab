@@ -8,6 +8,8 @@ Maintainer: Motohiro Ishida <ishida.motohiro@gmail.com>
 Description: parsing Japanese texts with mecab-0.996 / R-4.0.3
 License: GPL | LGPL | BSD
 Depends: R (>= 4.0.0)
+Imports:
+    stringr
 SystemRequirements:
     MeCab 0.996
     GNU make
