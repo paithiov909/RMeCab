@@ -16,10 +16,7 @@
 
 */
 
-// #define WIN 0
-
-#ifndef _RMECAB_H
-#define _RMECAB_H
+#pragma once
 
 #include "mecab.h"
 
@@ -33,6 +30,8 @@
 #define allocVector Rf_allocVector
 #define lengthgets Rf_lengthgets
 #define mkCharCE Rf_mkCharCE
+#define mkString Rf_mkString
+#define setAttrib Rf_setAttrib
 #define xlength(x) Rf_xlength(x)
 #define ScalarInteger Rf_ScalarInteger
 #endif
@@ -99,7 +98,3 @@ extern char* kigoCode();
     return (ScalarInteger(-1));                               \
   }
 ///////////////////////////////////////////////////////////////
-
-// extern "C" {
-// }
-#endif
