@@ -1,4 +1,4 @@
-##  sym = 0, pos = c("名詞", "形容詞"),kigo = "記号", 
+##  sym = 0, pos = c("名詞", "形容詞"),kigo = "記号",
 docMatrix2 <-
   function( directory,  pos = "Default"  , minFreq = 1, weight = "no", kigo = 0, co = 0,  dic = "" , mecabrc = "", etc = ""   ) {
     # posN <- length(pos)
@@ -10,7 +10,7 @@ docMatrix2 <-
       ft <- 0 # 単独ファイル
       file <- basename(directory)
       directory <- dirname(directory)
-      
+
     } else{
       stop("specify directory or a file!")
     }
@@ -35,7 +35,7 @@ docMatrix2 <-
       dic <- paste(dirname(dic), basename(dic), sep = "/")
      if (  !(file.exists(dic)) )
        {
-          cat ("specified dictionary file not found; result by default dictionary.\n")# 
+          cat ("specified dictionary file not found; result by default dictionary.\n")#
          dic = ""
        }
      else {
@@ -58,39 +58,39 @@ docMatrix2 <-
    }
    #
    opt <- paste(dic, mecabrc, etc)
-    
+
     if(minFreq < 1){
-      stop("minFreq argument must be equal to or larger than 1!")      
+      stop("minFreq argument must be equal to or larger than 1!")
     }
-    
-    
-    dtm <- .Call("docMatrix2", as.character(directory), as.character(file), as.numeric(fileN), as.numeric(ft), as.character(pos), as.numeric(posN),  as.numeric(minFreq), as.numeric(kigo), as.character(opt), PACKAGE="RMeCab")## as.numeric(sym),  as.character(kigo), 
-    
+
+
+    dtm <- .Call(docMatrix2_impl, as.character(directory), as.character(file), as.numeric(fileN), as.numeric(ft), as.character(pos), as.numeric(posN),  as.numeric(minFreq), as.numeric(kigo), as.character(opt), PACKAGE="RMeCab")## as.numeric(sym),  as.character(kigo),
+
     if(is.null(dtm)){
       stop("chage the value of minFreq argument!")
     }
-    
+
     dtm <- t(dtm)
                                         #  environment(dtm) = new.env()
     ## ##   class(dtm) <- "RMeCabMatrix"
-    
+
     if(co == 1 || co == 2 || co == 3){
-      
+
       dtm <- coOccurrence( removeInfo (dtm), co)
  ##     invisidoble(dtm)
     }
-    
-    
+
+
     ##   ######### < 2008 05 04 uncommented>
     if(weight == ""){
  ##      invisible( dtm)
 ##       break
     }else{
       argW <- unlist(strsplit(weight, "*", fixed = T))
-      
+
       for(i in 1:length(argW)){
         if(argW[i] == "no"){
-          invisible( dtm)  
+          invisible( dtm)
           ##        cat("Term Document Matrix includes 2 information rows!", "\n")
           ##         cat("whose names are [[LESS-THAN-", minFreq,"]] and [[TOTAL-TOKENS]]", "\n", sep = "")
           ##         cat("if you remove these rows, execute", "\n", "result[ row.names(result) !=  \"[[LESS-THAN-", minFreq, "]]\" , ]", "\n", "result[ row.names(result) !=  \"[[TOTAL-TOKENS]]\" , ]","\n" , sep = "")
@@ -110,7 +110,7 @@ docMatrix2 <-
         }else if(argW[i] == "idf4"){
           dtm <- dtm * globalEntropy(dtm)
         } else if(argW[i] == "norm"){
-          
+
           dtm <- t(t(dtm) * mynorm(dtm))
         }
       }
@@ -119,5 +119,5 @@ docMatrix2 <-
       }
 
     }
-    invisible( dtm)  
+    invisible( dtm)
   }

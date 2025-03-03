@@ -1,6 +1,6 @@
 importFrom("stats", "xtabs")
 
-useDynLib(RMeCab)
+useDynLib(RMeCab, .registration = TRUE)
 
 export(RMeCabC)
 

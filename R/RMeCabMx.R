@@ -25,7 +25,7 @@ function(filename, pos, posN, minFreq = 1, kigo = 0,  dic = "", mecabrc = "", et
      else {
        dic <- paste(" -u", dic)
      }
-   }	
+   }
    if(  is.null(mecabrc) || is.na(mecabrc) || (nchar(mecabrc)) < 2  ){
      mecabrc = ""
    } else {
@@ -42,10 +42,8 @@ function(filename, pos, posN, minFreq = 1, kigo = 0,  dic = "", mecabrc = "", et
    }
 
    opt <- paste(dic, mecabrc, etc)
-   
+
 
    # cat("* ")
-  .Call("RMeCabMx", as.character(filename) , pos, as.integer(posN), as.integer(minFreq), as.integer(kigo), as.character(opt),  PACKAGE="RMeCab")
+  .Call(RMeCabMx_impl, as.character(filename) , pos, as.integer(posN), as.integer(minFreq), as.integer(kigo), as.character(opt),  PACKAGE="RMeCab")
 }
-
-
