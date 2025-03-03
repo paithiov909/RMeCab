@@ -2,6 +2,6 @@
 ## comment out variables if you dont have these libs:
 
 PKG_CXXFLAGS = $(mecab-config --cflags)
-PKG_LIBS += $(mecab-config --libs) -lmecab
+PKG_LIBS += $(mecab-config --libs-only-L) -lmecab
 
 ## CXX_STD = CXX98
