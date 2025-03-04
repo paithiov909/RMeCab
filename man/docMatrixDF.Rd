@@ -35,7 +35,7 @@ Terms that appear less than \code{minFreq} within a document are ignored.}
 \item{etc}{Other options for 'MeCab' tagger.}
 }
 \value{
-An integer matrix.
+An integer matrix is invisibly returned.
 }
 \description{
 Creates a document-term matrix out of a character vector.

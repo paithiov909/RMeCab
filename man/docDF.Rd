@@ -51,7 +51,7 @@ Terms that appear less than \code{minFreq} within a document are ignored.}
 \item{etc}{Other options for 'MeCab' tagger.}
 }
 \value{
-A data.frame.
+A data.frame is invisibly returned.
 }
 \description{
 Counts tokens (characters, terms, or N-grams) within \code{target}.

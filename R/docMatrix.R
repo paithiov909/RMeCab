@@ -10,13 +10,17 @@
 #' @inheritParams rmecab-args-kigo
 #' @inheritParams rmecab-args-co
 #' @inheritParams rmecab-args-tagger
-#' @returns An integer matrix.
+#' @returns An integer matrix is invisibly returned.
 #' @export
-docMatrix <- function(mydir, pos = "Default", minFreq = 1, weight = "no", kigo = 0, co = 0, dic = "", mecabrc = "", etc = "") {
-  ##                                       #  gc()
-  ##     if("記号" %in% pos){
-  ##       kigo = 1
-  ##     }
+docMatrix <- function(mydir,
+                      pos = "Default",
+                      minFreq = 1,
+                      weight = "no",
+                      kigo = 0,
+                      co = 0,
+                      dic = "",
+                      mecabrc = "",
+                      etc = "") {
   if (any(pos == "" | is.na(pos))) {
     stop("specify pos argument!")
   }
@@ -25,7 +29,6 @@ docMatrix <- function(mydir, pos = "Default", minFreq = 1, weight = "no", kigo =
   } else {
     posN <- length(pos)
   }
-
   if (is.null(mecabrc) || is.na(mecabrc) || (nchar(mecabrc)) < 2) {
     mecabrc <- ""
   } else {
@@ -33,41 +36,24 @@ docMatrix <- function(mydir, pos = "Default", minFreq = 1, weight = "no", kigo =
     mecabrc <- paste(dirname(mecabrc), basename(mecabrc), sep = "/")
   }
 
-  ## if( is.null(dic) || is.na(dic)){
-  ##   dic = ""
-  ## } else if( (xl <- nchar(dic))  > 0 ) {
-  ##   if (substring(dic, xl-3) != ".dic" || !(file.exists(dic)) )
-  ##     {
-  ##      cat ("dictionary file not found; no dic file specified.\n")
-  ##      dic = ""
-  ##    }
-  ##   else {
-  ##     dic <- paste(" -u", dic)
-  ##   }
-  ## }
-
   weight <- weight
-  dummy <- lapply(dir(mydir, full.names = TRUE), docVector, pos, posN, minFreq, kigo, dic, mecabrc, etc)
-  # cat("\n")
+  dummy <- lapply(
+    dir(mydir, full.names = TRUE),
+    docVector,
+    pos, posN, minFreq, kigo, dic, mecabrc, etc
+  )
+
   if (length(dummy) == 0) {
-    #    gc()
     stop("no doc-matrix returned.")
   } else if (length(dummy) == 1) {
-    return(dummy)
+    return(invisible(dummy))
   }
-
 
   dtm <- t(xtabs(Freq ~ ., data = do.call("rbind", dummy)))
   if (co == 1 || co == 2 || co == 3) {
     dtm <- coOccurrence(removeInfo(dtm), co)
-    ##     invisible(dtm)
   }
 
-  #  environment(dtm) = new.env()
-  ## ##   class(dtm) <- "RMeCabMatrix"
-
-  ##   ######### < 2008 05 04 uncommented>
-  ##   ######### < 2009 03 06>
   if ((weight == "" || weight == "no") && co == 0) {
     cat("Term Document Matrix includes 2 information rows!", "\n")
     cat("whose names are [[LESS-THAN-", minFreq, "]] and [[TOTAL-TOKENS]]", "\n", sep = "")
@@ -75,10 +61,7 @@ docMatrix <- function(mydir, pos = "Default", minFreq = 1, weight = "no", kigo =
   } else {
     argW <- unlist(strsplit(weight, "*", fixed = T))
 
-    for (i in 1:length(argW)) {
-      ## if(nchar (argW[i]) < 2 ){#if(argW[i] == ""){
-      ##           break
-      ##         }else
+    for (i in seq_along(argW)) {
       if (argW[i] == "tf") {
         dtm <- localTF(dtm)
       } else if (argW[i] == "tf2") {
@@ -95,35 +78,12 @@ docMatrix <- function(mydir, pos = "Default", minFreq = 1, weight = "no", kigo =
         dtm <- dtm * globalEntropy(dtm)
       } else if (argW[i] == "norm") {
         if (i == 1) {
-          # dtm <- sweep(localTF(m), 2, globalNorm(m), "*")
           dtm <- removeInfo(dtm)
         }
         dtm <- t(t(dtm) * mynorm(dtm))
       }
     }
-
-    ##   ############# < 2008 05 04 uncommented>
-
-    ## ##   ### ########## < 2008 05 04 commented>
-    ##   if(weight == "tf*idf"){
-    ##     dtm <- localTF(dtm) * globalIDF(dtm)
-    ##   }else if(weight == "tf*idf*norm") {
-    ##     #dtm <- localTF(dtm)  * globalIDF(dtm) * globalNorm(dtm)
-    ##     tmp <- localTF(dtm)  * globalIDF(dtm)
-    ##     #dtm <- sweep(tmp, 2, mynorm(tmp), "*")
-    ##      dtm <- t(t(tmp) * mynorm(tmp))
-    ##   } else{
-    ##   ##     class(dtm) <-  "docMatrix"
-    ##   ## c("docMatrix", "xtabs", "table")
-    ##   ##     return ( dtm )
-    ##      invisible( dtm)
-    ##   }
-    ##   ### #############</ 2008 05 04 commented>
-
-    ##  class(dtm) <-  "docMatrix"
-    ## c("docMatrix", "xtabs", "table")
-    ##   return ( dtm )
-    if (any(is.na(dtm))) {
+    if (anyNA(dtm)) {
       cat("Warning! Term document matrix includes NA!", "\n")
     }
   }
@@ -131,78 +91,53 @@ docMatrix <- function(mydir, pos = "Default", minFreq = 1, weight = "no", kigo =
 }
 
 #' @noRd
-docVector <-
-  function(filename, pos, posN, minFreq, kigo, dic = "", mecabrc = "", etc = "") {
-    if (!file.exists(filename)) {
-      stop("file not found")
-    }
-    # posN <- length(pos)
-    if (kigo != 0 && kigo != 1) {
-      kigo <- 0
-    }
-    if (minFreq < 0) {
-      minFreq <- 1
-    }
-
-    if (is.null(mecabrc) || is.na(mecabrc) || (nchar(mecabrc)) < 2) {
-      mecabrc <- ""
-    } else {
-      # 2015 12 11         mecabrc <- paste(dirname(mecabrc), basename(mecabrc), sep = "/")
-    }
-
-
-    dummy <- RMeCabMx(filename, pos, posN, minFreq, kigo, dic, mecabrc, etc)
-    if (length(dummy) < 1) {
-      return(NULL)
-    } else {
-      return(data.frame(docs = basename(filename), terms = names(dummy), Freq = as.vector(dummy), row.names = NULL))
-    }
-    return(NULL)
+docVector <- function(filename, pos, posN, minFreq, kigo, dic = "", mecabrc = "", etc = "") {
+  if (!file.exists(filename)) {
+    stop("file not found")
   }
+  if (kigo != 0 && kigo != 1) {
+    kigo <- 0
+  }
+  if (minFreq < 0) {
+    minFreq <- 1
+  }
+  if (is.null(mecabrc) || is.na(mecabrc) || (nchar(mecabrc)) < 2) {
+    mecabrc <- ""
+  }
+
+  dummy <- RMeCabMx(filename, pos, posN, minFreq, kigo, dic, mecabrc, etc)
+  if (length(dummy) < 1) {
+    return(NULL)
+  } else {
+    return(
+      data.frame(
+        docs = basename(filename),
+        terms = names(dummy),
+        Freq = as.vector(dummy),
+        row.names = NULL
+      )
+    )
+  }
+  # return(NULL)
+}
 
 #' @noRd
-RMeCabMx <-
-  function(filename, pos, posN, minFreq = 1, kigo = 0, dic = "", mecabrc = "", etc = "") { #  sym = 0, kigo = "記号"
-
-    if (!file.exists(filename)) {
-      stop("file not found")
-    }
-    if (length(pos) < 1) {
-      stop("second argument must be specified.")
-    }
-    ##    if(posN != length(pos)){
-    ##      posN = length(pos)
-    ##    }
-    ## #   gc()
-
-
-    if (is.null(dic) || is.na(dic)) {
-      dic <- ""
-    } else if (nchar(dic) > 0) {
-      dic <- paste(dirname(dic), basename(dic), sep = "/")
-      if (!(file.exists(dic))) {
-        cat("specified dictionary file not found; result by default dictionary.\n")
-        dic <- ""
-      } else {
-        dic <- paste(" -u", dic)
-      }
-    }
-    if (is.null(mecabrc) || is.na(mecabrc) || (nchar(mecabrc)) < 2) {
-      mecabrc <- ""
-    } else {
-      # 2015 12 11
-      mecabrc <- paste(dirname(mecabrc), basename(mecabrc), sep = "/")
-      if (!(file.exists(mecabrc))) {
-        cat("specified mecabrc not found; result by default mecabrc.\n")
-        mecabrc <- ""
-      } else {
-        mecabrc <- paste("-r", mecabrc)
-      }
-    }
-
-    opt <- paste(dic, mecabrc, etc)
-
-
-    # cat("* ")
-    .Call(RMeCabMx_impl, as.character(filename), pos, as.integer(posN), as.integer(minFreq), as.integer(kigo), as.character(opt), PACKAGE = "RMeCab")
+RMeCabMx <- function(filename, pos, posN, minFreq = 1, kigo = 0, dic = "", mecabrc = "", etc = "") {
+  if (!file.exists(filename)) {
+    stop("file not found")
   }
+  if (length(pos) < 1) {
+    stop("second argument must be specified.")
+  }
+  opt <- getOptChr(dic, mecabrc, etc)
+
+  .Call(
+    RMeCabMx_impl,
+    as.character(filename),
+    pos, as.integer(posN),
+    as.integer(minFreq),
+    as.integer(kigo),
+    as.character(opt),
+    PACKAGE = "RMeCab"
+  )
+}

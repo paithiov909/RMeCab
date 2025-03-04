@@ -32,7 +32,7 @@ If \code{NULL}, all terms are extracted.}
 \item{etc}{Other options for 'MeCab' tagger.}
 }
 \value{
-A data.frame.
+A data.frame is invisibly returned.
 }
 \description{
 Creates a data.frame of N-gram out of all files in a given directory.

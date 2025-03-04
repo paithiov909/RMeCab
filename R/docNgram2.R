@@ -10,109 +10,94 @@
 #' @inheritParams rmecab-args-weight
 #' @inheritParams rmecab-args-kigo
 #' @inheritParams rmecab-args-tagger
-#' @returns returns a data frame.
+#' @returns A data.frame is invisibly returned.
 #' @export
-docNgram2 <-
-  function(directory, type = 0, pos = "Default", minFreq = 1, N = 2, kigo = 0, weight = "no", dic = "", mecabrc = "", etc = "") {
-    #    posN <- length(pos)
-
-    #    gc()
-    if (any(suppressWarnings(dir(directory)) > 0)) {
-      ft <- 1 ## ディレクトリが指定された
-      file <- dir(directory)
-    } else if (file.exists(directory)) {
-      ft <- 0 # 単独ファイル
-      file <- basename(directory)
-      directory <- dirname(directory)
-    } else {
-      stop("specify directory or a file!")
-    }
-    fileN <- length(file)
-
-    if (type != 0 && type != 1 && type != 2) {
-      stop("type must be 0 or 1 or 2")
-    }
-    if (type > 0 && (any(pos == "" | is.na(pos)))) {
-      stop("specify pos argument!")
-    }
-    if (length(pos) == 1 && pos == "Default") {
-      posN <- 0
-    } else {
-      posN <- length(pos)
-    }
-    ##     if(type > 0){# 形態素 or 品詞情報
-    ##       if( posN < 1){
-    ##         stop("specify pos argument")
-    ##       } else if("記号" %in% pos)
-    ##         sym = 1# 記号を頻度に含めて出力する
-    ##     }
-    if (minFreq < 1) {
-      stop("minFreq argument must be equal to or larger than 1 ")
-    }
-    if (N < 2) {
-      stop("N argument  must be equal to or larger than 2")
-    }
-
-
-    if (is.null(dic) || is.na(dic)) {
-      dic <- ""
-    } else if (nchar(dic) > 0) {
-      dic <- paste(dirname(dic), basename(dic), sep = "/")
-      if (!(file.exists(dic))) {
-        cat("specified dictionary file not found; result by default dictionary.\n") # cat ("dictionary file not found; no dic file specified.\n")
-        dic <- ""
-      } else {
-        dic <- paste(" -u", dic)
-      }
-    }
-    #
-    if (is.null(mecabrc) || is.na(mecabrc) || (nchar(mecabrc)) < 2) {
-      mecabrc <- ""
-    } else {
-      # 2015 12 11
-      mecabrc <- paste(dirname(mecabrc), basename(mecabrc), sep = "/")
-      if (!(file.exists(mecabrc))) {
-        cat("specified mecabrc not found; result by default mecabrc.\n")
-        mecabrc <- ""
-      } else {
-        mecabrc <- paste("-r", mecabrc)
-      }
-    }
-    #
-    opt <- paste(dic, mecabrc, etc)
-
-    dtm <- .Call(docNgram2_impl, as.character(directory), as.character(file), as.numeric(fileN), as.integer(ft), as.integer(type), as.character(pos), as.integer(posN), as.integer(minFreq), as.integer(N), as.integer(kigo), as.character(opt), PACKAGE = "RMeCab") # as.integer(sym), as.character(kigo),
-
-    if (weight == "no" || weight == "") {
-      invisible(t(dtm))
-      ##       break
-    } else {
-      argW <- unlist(strsplit(weight, "*", fixed = T))
-
-      for (i in 1:length(argW)) {
-        dtm <- t(dtm)
-
-        if (argW[i] == "tf") {
-          dtm <- localTF(dtm)
-        } else if (argW[i] == "tf2") {
-          dtm <- localLogTF(dtm)
-        } else if (argW[i] == "tf3") {
-          dtm <- localBin(dtm)
-        } else if (argW[i] == "idf") {
-          dtm <- dtm * globalIDF(dtm)
-        } else if (argW[i] == "idf2") {
-          dtm <- dtm * globalIDF2(dtm)
-        } else if (argW[i] == "idf3") {
-          dtm <- dtm * globalIDF3(dtm)
-        } else if (argW[i] == "idf4") {
-          dtm <- dtm * globalEntropy(dtm)
-        } else if (argW[i] == "norm") {
-          dtm <- t(t(dtm) * mynorm(dtm))
-        }
-      }
-      if (any(is.na(dtm))) {
-        cat("Warning! Term document matrix includes NA!", "\n")
-      }
-      invisible(dtm)
-    }
+docNgram2 <- function(directory,
+                      type = 0,
+                      pos = "Default",
+                      minFreq = 1,
+                      N = 2,
+                      kigo = 0,
+                      weight = "no",
+                      dic = "",
+                      mecabrc = "",
+                      etc = "") {
+  if (any(suppressWarnings(dir(directory)) > 0)) {
+    ft <- 1 ## ディレクトリが指定された
+    file <- dir(directory)
+  } else if (file.exists(directory)) {
+    ft <- 0 # 単独ファイル
+    file <- basename(directory)
+    directory <- dirname(directory)
+  } else {
+    stop("specify directory or a file!")
   }
+  fileN <- length(file)
+
+  if (type != 0 && type != 1 && type != 2) {
+    stop("type must be 0 or 1 or 2")
+  }
+  if (type > 0 && (any(pos == "" | is.na(pos)))) {
+    stop("specify pos argument!")
+  }
+  if (length(pos) == 1 && pos == "Default") {
+    posN <- 0
+  } else {
+    posN <- length(pos)
+  }
+  if (minFreq < 1) {
+    stop("minFreq argument must be equal to or larger than 1 ")
+  }
+  if (N < 2) {
+    stop("N argument  must be equal to or larger than 2")
+  }
+  opt <- getOptChr(dic, mecabrc, etc)
+
+  dtm <- .Call(
+    docNgram2_impl,
+    as.character(directory),
+    as.character(file),
+    as.numeric(fileN),
+    as.integer(ft),
+    as.integer(type),
+    as.character(pos),
+    as.integer(posN),
+    as.integer(minFreq),
+    as.integer(N),
+    as.integer(kigo),
+    as.character(opt),
+    PACKAGE = "RMeCab"
+  )
+
+  if (weight == "no" || weight == "") {
+    return(invisible(t(dtm)))
+  } else {
+    argW <- unlist(strsplit(weight, "*", fixed = TRUE))
+
+    for (i in seq_along(argW)) {
+      dtm <- t(dtm)
+
+      if (argW[i] == "tf") {
+        dtm <- localTF(dtm)
+      } else if (argW[i] == "tf2") {
+        dtm <- localLogTF(dtm)
+      } else if (argW[i] == "tf3") {
+        dtm <- localBin(dtm)
+      } else if (argW[i] == "idf") {
+        dtm <- dtm * globalIDF(dtm)
+      } else if (argW[i] == "idf2") {
+        dtm <- dtm * globalIDF2(dtm)
+      } else if (argW[i] == "idf3") {
+        dtm <- dtm * globalIDF3(dtm)
+      } else if (argW[i] == "idf4") {
+        dtm <- dtm * globalEntropy(dtm)
+      } else if (argW[i] == "norm") {
+        dtm <- t(t(dtm) * mynorm(dtm))
+      }
+    }
+    if (anyNA(dtm)) {
+      cat("Warning! Term document matrix includes NA!", "\n")
+    }
+    invisible(dtm)
+  }
+}

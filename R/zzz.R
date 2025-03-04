@@ -1,6 +1,9 @@
-#' @keywords internal
+#' @references \url{http://www.amazon.co.jp/dp/4627848420}
+#' @seealso \url{https://rmecab.jp/wiki/index.php?RMeCab}
+#'
 #' @importFrom stats xtabs
 #' @useDynLib RMeCab, .registration = TRUE
+#' @keywords internal
 "_PACKAGE"
 
 .onAttach <- function(libname, pkgname) {

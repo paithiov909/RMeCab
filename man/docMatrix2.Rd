@@ -40,7 +40,7 @@ Defaults to \code{0} (does not count symbols).}
 \item{etc}{Other options for 'MeCab' tagger.}
 }
 \value{
-An integer matrix.
+An integer matrix is invisibly returned.
 }
 \description{
 Creates a document-term matrix out of all files in a given directory.

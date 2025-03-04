@@ -11,11 +11,17 @@
 #' @inheritParams rmecab-args-kigo
 #' @inheritParams rmecab-args-co
 #' @inheritParams rmecab-args-tagger
-#' @returns An integer matrix.
+#' @returns An integer matrix is invisibly returned.
 #' @export
-docMatrix2 <- function(directory, pos = "Default", minFreq = 1, weight = "no", kigo = 0, co = 0, dic = "", mecabrc = "", etc = "") {
-  # posN <- length(pos)
-  #    gc()
+docMatrix2 <- function(directory,
+                       pos = "Default",
+                       minFreq = 1,
+                       weight = "no",
+                       kigo = 0,
+                       co = 0,
+                       dic = "",
+                       mecabrc = "",
+                       etc = "") {
   if (any(suppressWarnings(dir(directory)) > 0)) {
     ft <- 1 ## ディレクトリが指定された
     file <- dir(directory)
@@ -35,73 +41,42 @@ docMatrix2 <- function(directory, pos = "Default", minFreq = 1, weight = "no", k
   } else {
     posN <- length(pos)
   }
-  ##     if( posN  < 1){
-  ##       stop("specify pos argument")
-  ##     } else if("記号" %in% pos){
-  ##       sym = 1 # 記号を頻度に含めて出力する
-  ##     }
-
-  if (is.null(dic) || is.na(dic)) {
-    dic <- ""
-  } else if (nchar(dic) > 0) {
-    dic <- paste(dirname(dic), basename(dic), sep = "/")
-    if (!(file.exists(dic))) {
-      cat("specified dictionary file not found; result by default dictionary.\n") #
-      dic <- ""
-    } else {
-      dic <- paste(" -u", dic)
-    }
-  }
-  #
-  if (is.null(mecabrc) || is.na(mecabrc) || (nchar(mecabrc)) < 2) {
-    mecabrc <- ""
-  } else {
-    mecabrc <- paste(dirname(mecabrc), basename(mecabrc), sep = "/")
-    if (!(file.exists(mecabrc))) {
-      cat("specified mecabrc not found; result by default mecabrc.\n")
-      mecabrc <- ""
-    } else {
-      mecabrc <- paste("-r", mecabrc)
-    }
-  }
-  #
-  opt <- paste(dic, mecabrc, etc)
-
   if (minFreq < 1) {
     stop("minFreq argument must be equal to or larger than 1!")
   }
 
+  opt <- getOptChr(dic, mecabrc, etc)
 
-  dtm <- .Call(docMatrix2_impl, as.character(directory), as.character(file), as.numeric(fileN), as.numeric(ft), as.character(pos), as.numeric(posN), as.numeric(minFreq), as.numeric(kigo), as.character(opt), PACKAGE = "RMeCab") ## as.numeric(sym),  as.character(kigo),
+  dtm <- .Call(
+    docMatrix2_impl,
+    as.character(directory),
+    as.character(file),
+    as.numeric(fileN),
+    as.numeric(ft),
+    as.character(pos),
+    as.numeric(posN),
+    as.numeric(minFreq),
+    as.numeric(kigo),
+    as.character(opt),
+    PACKAGE = "RMeCab"
+  )
 
   if (is.null(dtm)) {
-    stop("chage the value of minFreq argument!")
+    stop("change the value of minFreq argument!")
   }
-
   dtm <- t(dtm)
-  #  environment(dtm) = new.env()
-  ## ##   class(dtm) <- "RMeCabMatrix"
 
   if (co == 1 || co == 2 || co == 3) {
     dtm <- coOccurrence(removeInfo(dtm), co)
-    ##     invisidoble(dtm)
   }
 
-
-  ##   ######### < 2008 05 04 uncommented>
   if (weight == "") {
-    ##      invisible( dtm)
-    ##       break
+    return(invisible(dtm))
   } else {
-    argW <- unlist(strsplit(weight, "*", fixed = T))
-
-    for (i in 1:length(argW)) {
+    argW <- unlist(strsplit(weight, "*", fixed = TRUE))
+    for (i in seq_along(argW)) {
       if (argW[i] == "no") {
-        invisible(dtm)
-        ##        cat("Term Document Matrix includes 2 information rows!", "\n")
-        ##         cat("whose names are [[LESS-THAN-", minFreq,"]] and [[TOTAL-TOKENS]]", "\n", sep = "")
-        ##         cat("if you remove these rows, execute", "\n", "result[ row.names(result) !=  \"[[LESS-THAN-", minFreq, "]]\" , ]", "\n", "result[ row.names(result) !=  \"[[TOTAL-TOKENS]]\" , ]","\n" , sep = "")
-        break
+        return(invisible(dtm))
       } else if (argW[i] == "tf") {
         dtm <- localTF(dtm)
       } else if (argW[i] == "tf2") {
@@ -120,7 +95,7 @@ docMatrix2 <- function(directory, pos = "Default", minFreq = 1, weight = "no", k
         dtm <- t(t(dtm) * mynorm(dtm))
       }
     }
-    if (any(is.na(dtm))) {
+    if (anyNA(dtm)) {
       cat("Warning! Term document matrix includes NA!", "\n")
     }
   }

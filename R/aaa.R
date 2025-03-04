@@ -47,7 +47,7 @@ NULL
 #'
 #' @param pos Parts of speech that should be extracted.
 #' If `NULL`, all terms are extracted.
-NULL # TODO: explain about `"Default"`
+NULL # TODO: explain about `"Default"`?
 
 #' Argument minFreq
 #'

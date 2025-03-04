@@ -7,7 +7,6 @@ coOccurrence <- function(dtm, co) {
   if (co == 3) {
     y <- diag(rowSums(dtm))
     colnames(y) <- rownames(y) <- rownames(dtm)
-
     for (i in 1:(nrow(dtm) - 1)) {
       for (j in nrow(dtm):2) {
         if (i == j) break
@@ -15,20 +14,20 @@ coOccurrence <- function(dtm, co) {
         y[j, i] <- sum(dtm[i, dtm[j, ] > 0])
       }
     }
-    return(y)
+    y
+
   } else if (co == 1 || co == 2) {
     ## 行名のタームと列名のタームが共起した回数
     ## 左右対称行列である
-
     y <- crossprod(t(dtm > 0))
-    # y <- y -  diag(diag(y))
+
     if (co == 1) {
-      return(y)
+      y
     } else {
       ### 行名のタームと列名のタームが共起したか否か
       ## 左右対称行列である
       y[y > 0] <- 1
-      return(y)
+      y
     }
   }
 }

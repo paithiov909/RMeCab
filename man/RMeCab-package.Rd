@@ -8,4 +8,10 @@
 \description{
 Parses Japanese texts with 'MeCab'.
 }
+\references{
+\url{http://www.amazon.co.jp/dp/4627848420}
+}
+\seealso{
+\url{https://rmecab.jp/wiki/index.php?RMeCab}
+}
 \keyword{internal}

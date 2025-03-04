@@ -4,7 +4,7 @@
 \alias{collScores}
 \title{collScores}
 \usage{
-collScores(kekka, node, span = 0)
+collScores(kekka, node, span)
 }
 \arguments{
 \item{kekka}{Result of \code{\link[=collocate]{collocate()}}.}

@@ -49,7 +49,7 @@ Defaults to \code{0} (does not count symbols).}
 \item{etc}{Other options for 'MeCab' tagger.}
 }
 \value{
-A data frame.
+A data frame is invisibly returned.
 }
 \description{
 Creates a data.frame of N-grams out of a character vector.

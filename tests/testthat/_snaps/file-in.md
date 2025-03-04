@@ -6,7 +6,7 @@
         "class": {
           "type": "character",
           "attributes": {},
-          "value": ["data.frame"]
+          "value": ["RMeCab_collocation", "data.frame"]
         },
         "names": {
           "type": "character",
