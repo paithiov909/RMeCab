@@ -1,3 +1,8 @@
+#' @keywords internal
+#' @importFrom stats xtabs
+#' @useDynLib RMeCab, .registration = TRUE
+"_PACKAGE"
+
 .onAttach <- function(libname, pkgname) {
   if (.Platform$OS.type == "windows") {
     packageStartupMessage(
@@ -9,4 +14,8 @@
       )
     )
   }
+}
+
+.onUnload <- function(libpath) {
+  library.dynam.unload("RMeCab", libpath)
 }

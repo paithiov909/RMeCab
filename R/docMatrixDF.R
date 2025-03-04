@@ -1,4 +1,18 @@
-## charVec = c("めかぶ","基広"), pos= c("名詞","動詞","形容詞"),
+# TODO: add test for this
+
+#' docMatrixDF
+#'
+#' Creates a document-term matrix out of a character vector.
+#' Each cell of the matrix shows the actual frequency of each word.
+#'
+#' @param charVec A character vector.
+#' @inheritParams rmecab-args-pos
+#' @inheritParams rmecab-args-minFreq
+#' @inheritParams rmecab-args-weight
+#' @inheritParams rmecab-args-co
+#' @inheritParams rmecab-args-tagger
+#' @returns An integer matrix.
+#' @export
 docMatrixDF <-
   function(charVec = c("MeCab", "CaBoCha"), pos = "Default", minFreq = 1, weight = "no", co = 0, dic = "", mecabrc = "", etc = "") {
     charLeng <- length(charVec)
@@ -21,7 +35,7 @@ docMatrixDF <-
 
     if (is.null(dic) || is.na(dic)) {
       dic <- ""
-    } else if ((xl <- nchar(dic)) > 0) {
+    } else if (nchar(dic) > 0) {
       dic <- paste(dirname(dic), basename(dic), sep = "/")
       if (!(file.exists(dic))) {
         cat("specified dictionary file not found; result by default dictionary.\n") #

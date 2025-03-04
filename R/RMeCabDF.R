@@ -1,3 +1,18 @@
+#' RMeCabDF
+#'
+#' Takes a data frame as an argument and tokenize it into
+#' a length-1 lists of term.
+#'
+#' @details
+#' This is a wrapper of [RMeCabC()].
+#' Any blanks should be replaced with `NA` for `coln`.
+#'
+#' @param dataf A data.frame.
+#' @param coln Column number or name which include the text to analyze
+#' @inheritParams rmecab-args-mypref
+#' @inheritParams rmecab-args-tagger
+#' @returns A list.
+#' @export
 RMeCabDF <-
   function(dataf, coln, mypref = 0,  dic = "" , mecabrc = "", etc = ""  ){
     if(!is.data.frame(dataf) ){
@@ -24,10 +39,10 @@ RMeCabDF <-
     ## }
 
 ##     if(as.numeric(coln) & as.numeric(coln) < ncol(dataf) ){
-##       stop("specified column not found!")      
+##       stop("specified column not found!")
 ##     }
 ##     if(as.character(coln) & !is.factor(dat[,coln]) | ! is.character(coln)){
-##      stop("specified column must be factor or character!")      
+##      stop("specified column must be factor or character!")
 ##     }
 ##     if(!is.numeric(coln) || coln > ncol(dataf)){
 ##       stop("the second argument must be integer")
@@ -39,9 +54,9 @@ RMeCabDF <-
       # stop("line number %d include non-characters!", i)
         kekka[[i]] <- NA
       }else{
-        kekka[[i]] <- unlist(RMeCabC(dataf[i,coln,drop=TRUE], mypref, dic, mecabrc, etc))# 
+        kekka[[i]] <- unlist(RMeCabC(dataf[i,coln,drop=TRUE], mypref, dic, mecabrc, etc))#
       }
     }
     return(kekka)
   }
-# 
+#

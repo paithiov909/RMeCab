@@ -1,4 +1,13 @@
-# 2008 03 28 # the third arg omitted
+#' RMeCabC
+#'
+#' Takes a string as an argument and tokenize it into
+#' a length-1 lists of term.
+#'
+#' @param str A string scalar to be tokenized.
+#' @inheritParams rmecab-args-mypref
+#' @inheritParams rmecab-args-tagger
+#' @return A list.
+#' @export
 RMeCabC <-
   function(str, mypref = 0, dic = "", mecabrc = "", etc = "") {
     #   gc()
@@ -12,7 +21,7 @@ RMeCabC <-
 
     if (is.null(dic) || is.na(dic)) {
       dic <- ""
-    } else if ((xl <- nchar(dic)) > 0) {
+    } else if (nchar(dic) > 0) {
       dic <- paste(dirname(dic), basename(dic), sep = "/")
       if (!(file.exists(dic))) {
         cat("specified dictionary file not found; result by default dictionary.\n")

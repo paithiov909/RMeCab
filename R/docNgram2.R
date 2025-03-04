@@ -1,4 +1,17 @@
-# 2008 03 28 # the third arg omitted  pos = c("名詞","形容詞"),sym = 0, kigo = "記号",
+#' docNgram2
+#'
+#' Creates a data frame of N-grams out of all files in a given directory.
+#'
+#' @param directory directory in which text files are stored
+#' or a single file.
+#' @inheritParams rmecab-args-set
+#' @inheritParams rmecab-args-pos
+#' @inheritParams rmecab-args-minFreq
+#' @inheritParams rmecab-args-weight
+#' @inheritParams rmecab-args-kigo
+#' @inheritParams rmecab-args-tagger
+#' @returns returns a data frame.
+#' @export
 docNgram2 <-
   function(directory, type = 0, pos = "Default", minFreq = 1, N = 2, kigo = 0, weight = "no", dic = "", mecabrc = "", etc = "") {
     #    posN <- length(pos)
@@ -43,7 +56,7 @@ docNgram2 <-
 
     if (is.null(dic) || is.na(dic)) {
       dic <- ""
-    } else if ((xl <- nchar(dic)) > 0) {
+    } else if (nchar(dic) > 0) {
       dic <- paste(dirname(dic), basename(dic), sep = "/")
       if (!(file.exists(dic))) {
         cat("specified dictionary file not found; result by default dictionary.\n") # cat ("dictionary file not found; no dic file specified.\n")

@@ -1,4 +1,16 @@
-# 2008 06 14  pos = c("名詞","形容詞"), kigo = "記号"
+#' NgramDF2
+#'
+#' Creates a data.frame of N-grams out of all files in a given directory.
+#'
+#' @param directory A directory in which text files are stored
+#' or a single file.
+#' @inheritParams rmecab-args-set
+#' @inheritParams rmecab-args-kigo
+#' @inheritParams rmecab-args-pos
+#' @inheritParams rmecab-args-minFreq
+#' @inheritParams rmecab-args-tagger
+#' @return A data.frame.
+#' @export
 NgramDF2 <-
   function(directory, type = 0, pos = "Default", minFreq = 1, N = 2, kigo = 0, dic = "", mecabrc = "", etc = "") {
     posN <- length(pos)
@@ -44,7 +56,7 @@ NgramDF2 <-
 
     if (is.null(dic) || is.na(dic)) {
       dic <- ""
-    } else if ((xl <- nchar(dic)) > 0) {
+    } else if (nchar(dic) > 0) {
       dic <- paste(dirname(dic), basename(dic), sep = "/")
       if (!(file.exists(dic))) # substring(dic, xl-3) != ".dic"
         {

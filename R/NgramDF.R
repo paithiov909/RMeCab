@@ -1,6 +1,13 @@
-# 2008 06 14
-# 2014 09 24 file.info(filename)$isdir 追加
-
+#' NgramDF
+#'
+#' Returns a data frame of N-gram.
+#'
+#' @param filename An input file.
+#' @inheritParams rmecab-args-set
+#' @inheritParams rmecab-args-pos
+#' @inheritParams rmecab-args-tagger
+#' @returns A data.frame.
+#' @export
 NgramDF <-
   function(filename, type = 0, N = 2, pos = "Default", dic = "", mecabrc = "", etc = "") { # pos = c("名詞","形容詞")
     # 2015 12 11 filename <- paste(dirname(filename), basename(filename), sep = "/")
@@ -33,7 +40,7 @@ NgramDF <-
 
     if (is.null(dic) || is.na(dic)) {
       dic <- ""
-    } else if ((xl <- nchar(dic)) > 0) {
+    } else if (nchar(dic) > 0) {
       dic <- paste(dirname(dic), basename(dic), sep = "/")
       if (!(file.exists(dic))) # substring(dic, xl-3) != ".dic" ||
         {

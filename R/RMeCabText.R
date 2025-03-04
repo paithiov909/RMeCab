@@ -1,4 +1,12 @@
-# 2014 09 24 file.info(filename)$isdir added
+#' RMeCabText
+#'
+#' Takes a file as an argument and tokenize it into
+#' a list of terms and parts of speech.
+#'
+#' @param filename An input file
+#' @inheritParams rmecab-args-tagger
+#' @return A list.
+#' @export
 RMeCabText <-
   function(filename, dic = "", mecabrc = "", etc = "") {
     #   gc()
@@ -12,7 +20,7 @@ RMeCabText <-
 
     if (is.null(dic) || is.na(dic)) {
       dic <- ""
-    } else if ((xl <- nchar(dic)) > 0) {
+    } else if (nchar(dic) > 0) {
       dic <- paste(dirname(dic), basename(dic), sep = "/")
       if (!(file.exists(dic))) {
         cat("specified dictionary file not found; result by default dictionary.\n")

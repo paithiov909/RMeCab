@@ -1,3 +1,14 @@
+#' RMeCabDoc
+#'
+#' Takes a file as an argument and tokenize it into
+#' a list of term.
+#'
+#' @param filename An input file.
+#' @inheritParams rmecab-args-mypref
+#' @inheritParams rmecab-args-kigo
+#' @inheritParams rmecab-args-tagger
+#' @returns A list.
+#' @export
 RMeCabDoc <-
   function(filename, mypref = 1, kigo = 0, dic = "", mecabrc = "", etc = "") {
     #  gc()
@@ -9,7 +20,7 @@ RMeCabDoc <-
 
     if (is.null(dic) || is.na(dic)) {
       dic <- ""
-    } else if ((xl <- nchar(dic)) > 0) {
+    } else if (nchar(dic) > 0) {
       dic <- paste(dirname(dic), basename(dic), sep = "/")
       if (!(file.exists(dic))) {
         cat("dictionary file not found; no dic file specified.\n")

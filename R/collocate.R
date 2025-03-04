@@ -1,48 +1,56 @@
-# 2014 09 24 file.info(filename)$isdir added
+#' collocate
+#'
+#' Finds collocations from the specified text file.
+#' Takes a `node` word and a window `span` as arguments.
+#'
+#' @param filename An input file.
+#' @param node Node word.
+#' @param span Windows span. Defaults to `3`.
+#' @inheritParams rmecab-args-tagger
+#' @returns A data.frame.
+#' @export
+collocate <- function(filename, node, span = 3, dic = "", mecabrc = "", etc = "") {
+  #   gc()
+  # 2015 12 11     filename <- paste(dirname(filename), basename(filename), sep = "/")
+  if (!file.exists(filename)) {
+    stop("file not found")
+  }
 
-collocate <-
-  function(filename, node, span = 3, dic = "", mecabrc = "", etc = "") {
-    #   gc()
-    # 2015 12 11     filename <- paste(dirname(filename), basename(filename), sep = "/")
-    if (!file.exists(filename)) {
-      stop("file not found")
-    }
+  if (file.info(filename)$isdir) {
+    stop("this is directory. Please input file name")
+  }
 
-    if (file.info(filename)$isdir) {
-      stop("this is directory. Please input file name")
-    }
-
-    if (nchar(node) < 1) {
-      stop("second argumet must be specified")
-    }
+  if (missing(node)) {
+    stop("second argumet must be specified")
+  }
 
 
-    if (is.null(dic) || is.na(dic)) {
+  if (is.null(dic) || is.na(dic)) {
+    dic <- ""
+  } else if (nchar(dic) > 0) {
+    dic <- paste(dirname(dic), basename(dic), sep = "/")
+    if (!(file.exists(dic))) {
+      cat("specified dictionary file not found; result by default dictionary.\n")
       dic <- ""
-    } else if ((xl <- nchar(dic)) > 0) {
-      dic <- paste(dirname(dic), basename(dic), sep = "/")
-      if (!(file.exists(dic))) {
-        cat("specified dictionary file not found; result by default dictionary.\n")
-        dic <- ""
-      } else {
-        dic <- paste(" -u", dic)
-      }
+    } else {
+      dic <- paste(" -u", dic)
     }
-    #
-    if (is.null(mecabrc) || is.na(mecabrc) || (nchar(mecabrc)) < 2) {
+  }
+  #
+  if (is.null(mecabrc) || is.na(mecabrc) || (nchar(mecabrc)) < 2) {
+    mecabrc <- ""
+  } else {
+    # 2015 12 11
+    mecabrc <- paste(dirname(mecabrc), basename(mecabrc), sep = "/")
+    if (!(file.exists(mecabrc))) {
+      cat("specified mecabrc not found; result by default mecabrc.\n")
       mecabrc <- ""
     } else {
-      # 2015 12 11
-      mecabrc <- paste(dirname(mecabrc), basename(mecabrc), sep = "/")
-      if (!(file.exists(mecabrc))) {
-        cat("specified mecabrc not found; result by default mecabrc.\n")
-        mecabrc <- ""
-      } else {
-        mecabrc <- paste("-r", mecabrc)
-      }
+      mecabrc <- paste("-r", mecabrc)
     }
-    #
-    opt <- paste(dic, mecabrc, etc)
-
-    .Call(collocate_impl, as.character(filename), as.character(node), as.numeric(span), as.character(opt), PACKAGE = "RMeCab")
   }
+  #
+  opt <- paste(dic, mecabrc, etc)
+
+  .Call(collocate_impl, as.character(filename), as.character(node), as.numeric(span), as.character(opt), PACKAGE = "RMeCab")
+}
