@@ -59,7 +59,7 @@ NULL # TODO: explain about `"Default"`?
 #' Terms that appear less than `minFreq` within a document are ignored.
 NULL
 
-#' Arguments co
+#' Argument co
 #'
 #' @name rmecab-args-co
 #' @rdname rmecab-args
@@ -68,7 +68,7 @@ NULL
 #' @param co If `1`, returns co-occurrence matrix.
 NULL
 
-#' Arguments mypref
+#' Argument mypref
 #'
 #' @name rmecab-args-mypref
 #' @rdname rmecab-args

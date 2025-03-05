@@ -50,8 +50,8 @@ Argument pos
 
 Argument minFreq
 
-Arguments co
+Argument co
 
-Arguments mypref
+Argument mypref
 }
 \keyword{internal}

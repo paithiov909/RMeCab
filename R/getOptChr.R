@@ -1,4 +1,4 @@
-#' Check if any mcabrc file exists
+#' Check if any mecabrc file exists
 #'
 #' @details
 #' This is a helper function that checks if any mecabrc file exists
@@ -15,7 +15,7 @@ anyRcfileExists <- function() {
   } else if (file.exists(path.expand("~/.mecabrc"))) {
     return(TRUE)
   }
-  # NOTE: this check is not complete. the actual default rc path may be different.
+  # NOTE: this check is incomplete. the actual default rc path may be different.
   switch(.Platform$OS.type,
     "windows" = file.exists("C:/PROGRA~1/mecab/etc/mecabrc"),
     "unix" = (file.exists("/etc/mecabrc") ||

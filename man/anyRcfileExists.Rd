@@ -2,7 +2,7 @@
 % Please edit documentation in R/getOptChr.R
 \name{anyRcfileExists}
 \alias{anyRcfileExists}
-\title{Check if any mcabrc file exists}
+\title{Check if any mecabrc file exists}
 \usage{
 anyRcfileExists()
 }
@@ -10,7 +10,7 @@ anyRcfileExists()
 A logical.
 }
 \description{
-Check if any mcabrc file exists
+Check if any mecabrc file exists
 }
 \details{
 This is a helper function that checks if any mecabrc file exists

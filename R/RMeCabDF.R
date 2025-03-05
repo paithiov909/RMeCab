@@ -24,7 +24,7 @@ RMeCabDF <- function(dataf, coln,
   kekka <- list(length(dataf[, coln, drop = TRUE]))
   for (i in seq_along(dataf[, coln, drop = TRUE])) {
     if (is.na(dataf[i, coln, drop = TRUE]) || dataf[i, coln, drop = TRUE] == "") {
-      kekka[[i]] <- NA
+      kekka[[i]] <- NA_character_
     } else {
       kekka[[i]] <- unlist(RMeCabC(dataf[i, coln, drop = TRUE], mypref, dic, mecabrc, etc))
     }
