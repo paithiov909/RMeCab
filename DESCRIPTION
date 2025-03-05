@@ -2,10 +2,18 @@ Type: Package
 Package: RMeCab
 Title: Interface to 'MeCab'
 Version: 1.14
-Author: Motohiro Ishida[aut, cre], Taku Kudo [aut]
+Authors@R: c(
+    person("Motohiro", "Ishida", , "ishida.motohiro@gmail.com", role = c("aut", "cre")),
+    person("Taku", "Kudo", role = "cph"),
+    person("Nippon Telegraph and Telephone Corporation", role = "cph")
+  )
 Maintainer: Motohiro Ishida <ishida.motohiro@gmail.com>
 Description: Parses Japanese texts with 'MeCab'.
-License: GPL | LGPL | BSD
+    The original 'MeCab' is licensed under the BSD 3-Clause "New" or "Revised" License.
+    See the "LICENSE.note" file for its license notice.
+License: GPL (>= 3)
+Depends:
+    R (>= 4.2)
 Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

@@ -1,3 +1,4 @@
 ^\.github$
 ^\.vscode$
 ^mecab$
+^LICENSE\.md$
