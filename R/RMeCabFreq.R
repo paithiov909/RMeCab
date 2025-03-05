@@ -8,9 +8,9 @@
 #' @returns A data.frame.
 #' @export
 #' @examples
-#' if (anyRcfileExists()) {
-#'   text_file <- system.file("samples/doc1.txt", package = "RMeCab")
-#'   RMeCabFreq(text_file)
+#' \dontrun{
+#' text_file <- system.file("samples/doc1.txt", package = "RMeCab")
+#' RMeCabFreq(text_file)
 #' }
 RMeCabFreq <- function(filename, dic = "", mecabrc = "", etc = "") {
   if (!file.exists(filename)) {

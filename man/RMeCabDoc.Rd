@@ -28,8 +28,8 @@ Takes a file as an argument and tokenize it into
 a list of term.
 }
 \examples{
-if (anyRcfileExists()) {
-  text_file <- system.file("samples/doc1.txt", package = "RMeCab")
-  unlist(RMeCabDoc(text_file))
+\dontrun{
+text_file <- system.file("samples/doc1.txt", package = "RMeCab")
+unlist(RMeCabDoc(text_file))
 }
 }

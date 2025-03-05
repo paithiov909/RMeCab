@@ -23,8 +23,8 @@ Takes a file as an argument and tokenize it into
 a list of terms and parts of speech.
 }
 \examples{
-if (anyRcfileExists()) {
-  text_file <- system.file("samples/doc1.txt", package = "RMeCab")
-  RMeCabText(text_file)
+\dontrun{
+text_file <- system.file("samples/doc1.txt", package = "RMeCab")
+RMeCabText(text_file)
 }
 }

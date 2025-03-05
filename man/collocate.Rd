@@ -27,8 +27,9 @@ Finds collocations from the specified text file.
 Takes a \code{node} word and a window \code{span} as arguments.
 }
 \examples{
-if (anyRcfileExists()) {
-  text_file <- system.file("samples/doc1.txt", package = "RMeCab")
-  out <- collocate(text_file, "\u6570\u5b66")
+\dontrun{
+text_file <- system.file("samples/doc1.txt", package = "RMeCab")
+out <- collocate(text_file, "\u6570\u5b66")
+out
 }
 }

@@ -50,9 +50,9 @@ A data.frame is invisibly returned.
 Creates a data frame of N-grams out of all files in a given directory.
 }
 \examples{
-if (anyRcfileExists()) {
-  text_dir <- system.file("samples", package = "RMeCab")
-  out <- docNgram2(text_dir, type = 1)
-  head(out)
+\dontrun{
+text_dir <- system.file("samples", package = "RMeCab")
+out <- docNgram2(text_dir, type = 1)
+head(out)
 }
 }

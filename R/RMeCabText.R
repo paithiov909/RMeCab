@@ -8,9 +8,9 @@
 #' @return A list.
 #' @export
 #' @examples
-#' if (anyRcfileExists()) {
-#'   text_file <- system.file("samples/doc1.txt", package = "RMeCab")
-#'   RMeCabText(text_file)
+#' \dontrun{
+#' text_file <- system.file("samples/doc1.txt", package = "RMeCab")
+#' RMeCabText(text_file)
 #' }
 RMeCabText <- function(filename, dic = "", mecabrc = "", etc = "") {
   if (!file.exists(filename)) {

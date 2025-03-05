@@ -9,10 +9,10 @@
 #' @returns A data.frame.
 #' @export
 #' @examples
-#' if (anyRcfileExists()) {
-#'   text_file <- system.file("samples/doc1.txt", package = "RMeCab")
-#'   out <- NgramDF(text_file, type = 1)
-#'   head(out)
+#' \dontrun{
+#' text_file <- system.file("samples/doc1.txt", package = "RMeCab")
+#' out <- NgramDF(text_file, type = 1)
+#' head(out)
 #' }
 NgramDF <- function(filename,
                     type = 0,

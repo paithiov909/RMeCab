@@ -12,10 +12,10 @@
 #' @return A data.frame is invisibly returned.
 #' @export
 #' @examples
-#' if (anyRcfileExists()) {
-#'   text_dir <- system.file("samples", package = "RMeCab")
-#'   out <- NgramDF2(text_dir, type = 1)
-#'   head(out)
+#' \dontrun{
+#' text_dir <- system.file("samples", package = "RMeCab")
+#' out <- NgramDF2(text_dir, type = 1)
+#' head(out)
 #' }
 NgramDF2 <- function(directory,
                      type = 0,

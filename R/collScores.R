@@ -8,10 +8,10 @@
 #' @returns A data frame.
 #' @export
 #' @examples
-#' if (anyRcfileExists()) {
-#'   text_file <- system.file("samples/doc1.txt", package = "RMeCab")
-#'   out <- collocate(text_file, "\u6570\u5b66")
-#'   collScores(out, "\u6570\u5b66", 3)
+#' \dontrun{
+#' text_file <- system.file("samples/doc1.txt", package = "RMeCab")
+#' out <- collocate(text_file, "\u6570\u5b66")
+#' collScores(out, "\u6570\u5b66", 3)
 #' }
 collScores <- function(kekka, node, span) {
   ## @Book{barnbrook96:_languag_comput,

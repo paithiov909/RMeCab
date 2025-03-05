@@ -47,9 +47,9 @@ Creates a document-term matrix out of all files in a given directory.
 Each cell of the matrix shows the actual frequency of each word.
 }
 \examples{
-if (anyRcfileExists()) {
-  text_dir <- system.file("samples", package = "RMeCab")
-  out <- docMatrix2(text_dir)
-  head(out)
+\dontrun{
+text_dir <- system.file("samples", package = "RMeCab")
+out <- docMatrix2(text_dir)
+head(out)
 }
 }

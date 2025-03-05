@@ -14,10 +14,10 @@
 #' @returns An integer matrix is invisibly returned.
 #' @export
 #' @examples
-#' if (anyRcfileExists()) {
-#'   text_dir <- system.file("samples", package = "RMeCab")
-#'   out <- docMatrix2(text_dir)
-#'   head(out)
+#' \dontrun{
+#' text_dir <- system.file("samples", package = "RMeCab")
+#' out <- docMatrix2(text_dir)
+#' head(out)
 #' }
 docMatrix2 <- function(directory,
                        pos = "Default",

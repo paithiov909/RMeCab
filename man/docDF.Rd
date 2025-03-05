@@ -58,9 +58,9 @@ Counts tokens (characters, terms, or N-grams) within \code{target}.
 \code{target} can be a file, directory, or a data.frame.
 }
 \examples{
-if (anyRcfileExists()) {
-  text_dir <- system.file("samples", package = "RMeCab")
-  out <- docDF(text_dir, column = 0, type = 1, minFreq = 2)
-  head(out)
+\dontrun{
+text_dir <- system.file("samples", package = "RMeCab")
+out <- docDF(text_dir, column = 0, type = 1, minFreq = 2)
+head(out)
 }
 }

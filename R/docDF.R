@@ -16,10 +16,10 @@
 #' @returns A data.frame is invisibly returned.
 #' @export
 #' @examples
-#' if (anyRcfileExists()) {
-#'   text_dir <- system.file("samples", package = "RMeCab")
-#'   out <- docDF(text_dir, column = 0, type = 1, minFreq = 2)
-#'   head(out)
+#' \dontrun{
+#' text_dir <- system.file("samples", package = "RMeCab")
+#' out <- docDF(text_dir, column = 0, type = 1, minFreq = 2)
+#' head(out)
 #' }
 docDF <- function(target,
                   column = 0,

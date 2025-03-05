@@ -10,9 +10,10 @@
 #' @returns A data.frame.
 #' @export
 #' @examples
-#' if (anyRcfileExists()) {
-#'   text_file <- system.file("samples/doc1.txt", package = "RMeCab")
-#'   out <- collocate(text_file, "\u6570\u5b66")
+#' \dontrun{
+#' text_file <- system.file("samples/doc1.txt", package = "RMeCab")
+#' out <- collocate(text_file, "\u6570\u5b66")
+#' out
 #' }
 collocate <- function(filename,
                       node,
