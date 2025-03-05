@@ -37,3 +37,10 @@ A data.frame.
 \description{
 Returns a data.frame of N-gram.
 }
+\examples{
+if (anyRcfileExists()) {
+  text_file <- system.file("samples/doc1.txt", package = "RMeCab")
+  out <- Ngram(text_file, type = 1)
+  head(out)
+}
+}

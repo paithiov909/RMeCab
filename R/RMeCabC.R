@@ -8,6 +8,14 @@
 #' @inheritParams rmecab-args-tagger
 #' @return A list.
 #' @export
+#' @examples
+#' if (anyRcfileExists()) {
+#'   text <- scan(
+#'     system.file("samples/doc1.txt", package = "RMeCab"),
+#'     what = character()
+#'   )
+#'   unlist(RMeCabC(text))
+#' }
 RMeCabC <- function(str,
                     mypref = 0,
                     dic = "",

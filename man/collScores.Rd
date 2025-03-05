@@ -17,5 +17,12 @@ collScores(kekka, node, span)
 A data frame.
 }
 \description{
-Calculates T-score and MI-score according to the result of \link{collocate}.
+Calculates T-score and MI-score according to the result of \code{\link[=collocate]{collocate()}}.
+}
+\examples{
+if (anyRcfileExists()) {
+  text_file <- system.file("samples/doc1.txt", package = "RMeCab")
+  out <- collocate(text_file, "\u6570\u5b66")
+  collScores(out, "\u6570\u5b66", 3)
+}
 }

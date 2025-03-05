@@ -9,7 +9,7 @@ RMeCabDF(dataf, coln, mypref = 0, dic = "", mecabrc = "", etc = "")
 \arguments{
 \item{dataf}{A data.frame.}
 
-\item{coln}{Column number or name which include the text to analyze}
+\item{coln}{Column number or name which include the text to analyze.}
 
 \item{mypref}{If \code{1}, returns basic forms of terms.}
 

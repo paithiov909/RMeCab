@@ -8,7 +8,7 @@
 #' Any blanks should be replaced with `NA` for `coln`.
 #'
 #' @param dataf A data.frame.
-#' @param coln Column number or name which include the text to analyze
+#' @param coln Column number or name which include the text to analyze.
 #' @inheritParams rmecab-args-mypref
 #' @inheritParams rmecab-args-tagger
 #' @returns A list.

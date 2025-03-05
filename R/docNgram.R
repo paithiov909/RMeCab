@@ -8,6 +8,12 @@
 #' @inheritParams rmecab-args-tagger
 #' @returns A data.frame is invisibly returned.
 #' @export
+#' @examples
+#' if (anyRcfileExists()) {
+#'   text_dir <- system.file("samples", package = "RMeCab")
+#'   out <- docNgram(text_dir, type = 1)
+#'   head(out)
+#' }
 docNgram <- function(mydir,
                      type = 1,
                      N = 2,

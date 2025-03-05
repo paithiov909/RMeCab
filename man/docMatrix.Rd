@@ -45,3 +45,10 @@ An integer matrix is invisibly returned.
 Creates a document-term matrix out of all files in a given directory.
 Each cell of the matrix shows the actual frequency of each word.
 }
+\examples{
+if (anyRcfileExists()) {
+  text_dir <- system.file("samples", package = "RMeCab")
+  out <- docMatrix(text_dir)
+  head(out)
+}
+}

@@ -37,3 +37,10 @@ A data.frame is invisibly returned.
 \description{
 Creates a data.frame of N-gram out of all files in a given directory.
 }
+\examples{
+if (anyRcfileExists()) {
+  text_dir <- system.file("samples", package = "RMeCab")
+  out <- docNgram(text_dir, type = 1)
+  head(out)
+}
+}

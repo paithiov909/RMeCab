@@ -12,6 +12,12 @@
 #' @inheritParams rmecab-args-tagger
 #' @returns An integer matrix is invisibly returned.
 #' @export
+#' @examples
+#' if (anyRcfileExists()) {
+#'   text_dir <- system.file("samples", package = "RMeCab")
+#'   out <- docMatrix(text_dir)
+#'   head(out)
+#' }
 docMatrix <- function(mydir,
                       pos = "Default",
                       minFreq = 1,

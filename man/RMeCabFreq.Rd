@@ -22,3 +22,9 @@ A data.frame.
 Takes text files as first argument
 and returns parts of speech and frequencies as a data.frame.
 }
+\examples{
+if (anyRcfileExists()) {
+  text_file <- system.file("samples/doc1.txt", package = "RMeCab")
+  RMeCabFreq(text_file)
+}
+}

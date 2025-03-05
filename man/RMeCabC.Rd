@@ -24,3 +24,12 @@ A list.
 Takes a string as an argument and tokenize it into
 a length-1 lists of term.
 }
+\examples{
+if (anyRcfileExists()) {
+  text <- scan(
+    system.file("samples/doc1.txt", package = "RMeCab"),
+    what = character()
+  )
+  unlist(RMeCabC(text))
+}
+}

@@ -9,6 +9,11 @@
 #' @inheritParams rmecab-args-tagger
 #' @returns A list.
 #' @export
+#' @examples
+#' if (anyRcfileExists()) {
+#'   text_file <- system.file("samples/doc1.txt", package = "RMeCab")
+#'   unlist(RMeCabDoc(text_file))
+#' }
 RMeCabDoc <- function(filename,
                       mypref = 1,
                       kigo = 0,

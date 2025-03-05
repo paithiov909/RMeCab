@@ -2,7 +2,7 @@
 % Please edit documentation in R/getOptChr.R
 \name{anyRcfileExists}
 \alias{anyRcfileExists}
-\title{Check if any mecabrc file exists}
+\title{anyRcfileExists}
 \usage{
 anyRcfileExists()
 }
@@ -10,12 +10,12 @@ anyRcfileExists()
 A logical.
 }
 \description{
-Check if any mecabrc file exists
+Checks if any mecabrc file exists.
 }
 \details{
 This is a helper function that checks if any mecabrc file exists
 before initializing tagger.
 
-MeCab expects a mecabrc file to be present;
+'MeCab' expects a mecabrc file to be present;
 if not, it will raise an error (without any message!).
 }

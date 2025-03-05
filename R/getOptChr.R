@@ -1,10 +1,12 @@
-#' Check if any mecabrc file exists
+#' anyRcfileExists
+#'
+#' Checks if any mecabrc file exists.
 #'
 #' @details
 #' This is a helper function that checks if any mecabrc file exists
 #' before initializing tagger.
 #'
-#' MeCab expects a mecabrc file to be present;
+#' 'MeCab' expects a mecabrc file to be present;
 #' if not, it will raise an error (without any message!).
 #'
 #' @returns A logical.

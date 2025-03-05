@@ -8,6 +8,12 @@
 #' @inheritParams rmecab-args-tagger
 #' @return A data.frame.
 #' @export
+#' @examples
+#' if (anyRcfileExists()) {
+#'   text_file <- system.file("samples/doc1.txt", package = "RMeCab")
+#'   out <- Ngram(text_file, type = 1)
+#'   head(out)
+#' }
 Ngram <- function(filename,
                   type = 0,
                   N = 2,
