@@ -1,4 +1,5 @@
 skip_on_cran()
+skip_if_not(anyRcfileExists(), "mecabrc file not found")
 
 text_file <- system.file("samples/doc1.txt", package = "RMeCab")
 text_dir <- system.file("samples", package = "RMeCab")

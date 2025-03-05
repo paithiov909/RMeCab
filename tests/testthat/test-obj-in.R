@@ -1,4 +1,5 @@
 skip_on_cran()
+skip_if_not(anyRcfileExists(), "mecabrc file not found")
 
 # NOTE: Skipping tests for `RMeCabDF()`
 test_that("RMeCabC works", {

@@ -95,6 +95,6 @@ extern char* kigoCode();
   if (!eval) {                                                \
     fprintf(stderr, "Exception:%s\n", mecab_strerror(mecab)); \
     mecab_destroy(mecab);                                     \
-    return (ScalarInteger(-1));                               \
+    Rf_error("something gone wrong in MeCab");                \
   }
 ///////////////////////////////////////////////////////////////
