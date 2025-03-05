@@ -36,7 +36,7 @@ Terms that appear less than \code{minFreq} within a document are ignored.}
 
 \item{N}{Unit of tokens. If \code{2}, counts bi-grams.}
 
-\item{Genkei}{If \code{0}, counts genkei. Defaults to \code{0}.}
+\item{Genkei}{If \code{0}, counts basic form of terms. Defaults to \code{0}.}
 
 \item{weight}{Method to weight term frequencies.}
 
@@ -46,7 +46,7 @@ Terms that appear less than \code{minFreq} within a document are ignored.}
 
 \item{dic}{Path to a user dictionary file such as \code{ishida.dic}.}
 
-\item{mecabrc}{Path to a mecab resource file.}
+\item{mecabrc}{Path to a mecabrc file.}
 
 \item{etc}{Other options for 'MeCab' tagger.}
 }

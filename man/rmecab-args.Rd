@@ -13,7 +13,7 @@
 \arguments{
 \item{dic}{Path to a user dictionary file such as \code{ishida.dic}.}
 
-\item{mecabrc}{Path to a mecab resource file.}
+\item{mecabrc}{Path to a mecabrc file.}
 
 \item{etc}{Other options for 'MeCab' tagger.}
 
@@ -35,7 +35,7 @@ Terms that appear less than \code{minFreq} within a document are ignored.}
 
 \item{co}{If \code{1}, returns co-occurrence matrix.}
 
-\item{mypref}{If \code{1}, returns basic forms of terms.}
+\item{mypref}{If \code{1}, returns basic form of terms.}
 }
 \description{
 Arguments for tagger

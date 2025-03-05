@@ -5,7 +5,7 @@
 #' @keywords internal
 #'
 #' @param dic Path to a user dictionary file such as `ishida.dic`.
-#' @param mecabrc Path to a mecab resource file.
+#' @param mecabrc Path to a mecabrc file.
 #' @param etc Other options for 'MeCab' tagger.
 NULL
 
@@ -74,5 +74,5 @@ NULL
 #' @rdname rmecab-args
 #' @keywords internal
 #'
-#' @param mypref If `1`, returns basic forms of terms.
+#' @param mypref If `1`, returns basic form of terms.
 NULL

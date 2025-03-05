@@ -5,7 +5,7 @@
 #'
 #' @param target A file, directory, or a data.frame.
 #' @param column Column number or name which include the text to analyze.
-#' @param Genkei If `0`, counts genkei. Defaults to `0`.
+#' @param Genkei If `0`, counts basic form of terms. Defaults to `0`.
 #' @param nDF If `1`, N-grams are divided into columns.
 #' @inheritParams rmecab-args-set
 #' @inheritParams rmecab-args-pos

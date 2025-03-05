@@ -9,14 +9,14 @@ RMeCabDoc(filename, mypref = 1, kigo = 0, dic = "", mecabrc = "", etc = "")
 \arguments{
 \item{filename}{An input file.}
 
-\item{mypref}{If \code{1}, returns basic forms of terms.}
+\item{mypref}{If \code{1}, returns basic form of terms.}
 
 \item{kigo}{If \code{1}, \verb{[[TOTAL-TOKENS]]} includes number of symbols.
 Defaults to \code{0} (does not count symbols).}
 
 \item{dic}{Path to a user dictionary file such as \code{ishida.dic}.}
 
-\item{mecabrc}{Path to a mecab resource file.}
+\item{mecabrc}{Path to a mecabrc file.}
 
 \item{etc}{Other options for 'MeCab' tagger.}
 }

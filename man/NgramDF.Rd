@@ -27,7 +27,7 @@ If \code{NULL}, all terms are extracted.}
 
 \item{dic}{Path to a user dictionary file such as \code{ishida.dic}.}
 
-\item{mecabrc}{Path to a mecab resource file.}
+\item{mecabrc}{Path to a mecabrc file.}
 
 \item{etc}{Other options for 'MeCab' tagger.}
 }

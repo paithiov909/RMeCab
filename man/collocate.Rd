@@ -11,11 +11,11 @@ collocate(filename, node, span = 3, dic = "", mecabrc = "", etc = "")
 
 \item{node}{Node word.}
 
-\item{span}{Windows span. Defaults to \code{3}.}
+\item{span}{Window span. Defaults to \code{3}.}
 
 \item{dic}{Path to a user dictionary file such as \code{ishida.dic}.}
 
-\item{mecabrc}{Path to a mecab resource file.}
+\item{mecabrc}{Path to a mecabrc file.}
 
 \item{etc}{Other options for 'MeCab' tagger.}
 }

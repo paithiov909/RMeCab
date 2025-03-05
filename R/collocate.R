@@ -5,7 +5,7 @@
 #'
 #' @param filename An input file.
 #' @param node Node word.
-#' @param span Windows span. Defaults to `3`.
+#' @param span Window span. Defaults to `3`.
 #' @inheritParams rmecab-args-tagger
 #' @returns A data.frame.
 #' @export

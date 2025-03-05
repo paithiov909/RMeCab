@@ -11,11 +11,11 @@ RMeCabDF(dataf, coln, mypref = 0, dic = "", mecabrc = "", etc = "")
 
 \item{coln}{Column number or name which include the text to analyze.}
 
-\item{mypref}{If \code{1}, returns basic forms of terms.}
+\item{mypref}{If \code{1}, returns basic form of terms.}
 
 \item{dic}{Path to a user dictionary file such as \code{ishida.dic}.}
 
-\item{mecabrc}{Path to a mecab resource file.}
+\item{mecabrc}{Path to a mecabrc file.}
 
 \item{etc}{Other options for 'MeCab' tagger.}
 }
